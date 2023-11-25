@@ -11,6 +11,11 @@ public class h3 implements ToIntFunction<MazeExplorer> {
 
     @Override
     public int applyAsInt(MazeExplorer node) {
-        return (int)((node.getM().getXMax() * node.getM().getYMax())/2);
+        Iterator<Pos> a = node.getM().getTreasures().iterator();
+        int count = 0;
+        for(int i = 0; i < node.getM().getTreasures().size(); i++) {
+            count += node.getLocation().getManhattanDist(a.next());
+        }
+        return count;
     }
 }
