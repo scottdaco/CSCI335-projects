@@ -12,10 +12,11 @@ public class h3 implements ToIntFunction<MazeExplorer> {
     @Override
     public int applyAsInt(MazeExplorer node) {
         Iterator<Pos> a = node.getM().getTreasures().iterator();
-        int count = 0;
-        for(int i = 0; i < node.getM().getTreasures().size(); i++) {
-            count += node.getLocation().getManhattanDist(a.next());
+        int current = 0;
+        for (int i = 0; i < node.getM().getTreasures().size(); i++) {
+            current = node.getLocation().getManhattanDist(a.next());
+            break;
         }
-        return count;
+        return current;
     }
 }

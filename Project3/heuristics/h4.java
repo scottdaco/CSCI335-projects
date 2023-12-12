@@ -16,11 +16,6 @@ public class h4 implements ToIntFunction<MazeExplorer> {
         for(int i = 0; i < node.getM().getTreasures().size(); i++) {
             count1 += node.getLocation().getManhattanDist(a.next());
         }
-        Iterator<Pos> b = node.getGoal().getAllTreasureFromMaze().iterator();
-        int count2 = 0;
-        for(int i = 0; i < node.getM().getTreasures().size(); i++) {
-            count2 += node.getLocation().getManhattanDist(b.next());
-        }
-        return count2 + count1;
+        return count1;
     }
 }
