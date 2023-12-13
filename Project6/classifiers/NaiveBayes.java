@@ -27,18 +27,21 @@ public class NaiveBayes<V,L,F,FV> implements Classifier<V,L> {
     public L classify(V example) {
         int sum = 0;
         L bl = null;
-        double bn = 0;
+        double bn = -Integer.MAX_VALUE;
         for (L n: featureCounts.keySet()) {
             sum += featureCounts.get(n).getTotalCounts();
+        }
+        if(sum == 0) {
+            sum = 1;
         }
         for (L n: featureCounts.keySet()) {
             double r = 1;
             for(int i = 0; i < allFeaturesFrom.apply(example).size(); i++) {
                 int p = featureCounts.get(n).getCountFor(allFeaturesFrom.apply(example).get(i));
-                r *= ((double) p + 1);
+                r *= ((double) p+1)/(sum);
             }
-            r = (r)/sum;
-            if (((r)) > bn) {
+//            r = (r+1)/(sum+1);
+            if (r > bn) {
                 bn = r;
                 bl = n;
             }
